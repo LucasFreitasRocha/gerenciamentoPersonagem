@@ -1,19 +1,19 @@
 package com.gp.enums;
 
-public enum Sexo {
-
-	MASCULINO("MASCULINO"),
-	FEMINIO("FEMININO"),
-	OUTROS("OUTROS");
+public enum TipoClasseEnum {
+	
+	MAGO("MAGO"),
+	LADINO("LADINO"),
+	GUERREIRO("GUERREIRO");
 	
 	private String valor;
 
 
-	private Sexo() {
+	private TipoClasseEnum() {
 	}
 
 	
-	private Sexo(String valor) {
+	private TipoClasseEnum(String valor) {
 		this.valor = valor;
 	}
 	
@@ -26,5 +26,6 @@ public enum Sexo {
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
+
 
 }

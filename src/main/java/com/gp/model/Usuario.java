@@ -1,11 +1,19 @@
 package com.gp.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class Usuario implements Serializable  {
@@ -14,13 +22,22 @@ public class Usuario implements Serializable  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(nullable = false, length = 150)
 	private String nome;
+	@Column(nullable = false, unique = true, updatable = false, length = 15)
 	private String cpf;
+	@Column ( nullable = false ,length = 3)
 	private Integer idade;
+	@Column(nullable = false, length = 50 , unique= true)
 	private String email;
+	@Column(nullable = false, length = 20)
 	private String telefone;
+	@Column(nullable = false)
 	private String senha;
 	
+	@OneToMany(mappedBy = "usuario" , cascade = CascadeType.REMOVE)
+	 @LazyCollection(LazyCollectionOption.FALSE)
+	private List<Personagem> personagens = new ArrayList<>();
 	
 	public Usuario() {
 		super();
@@ -105,6 +122,16 @@ public class Usuario implements Serializable  {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+
+	public List<Personagem> getPersonagems() {
+		return personagens;
+	}
+
+
+	public void setPersonagems(List<Personagem> personagems) {
+		this.personagens = personagems;
 	}
 
 

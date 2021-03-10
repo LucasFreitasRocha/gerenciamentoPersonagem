@@ -1,26 +1,24 @@
 package com.gp.enums;
 
-public enum Aparencia {
+public enum TipoCabeloEnum {
 	
-	MASCULINA("MASCULINA"),
-	FEMINIA("FEMINIA");
+	RASPADO("RASPADO"),
+	CURTO("CURTO"),
+	MEDIO("MEDIO"),
+	LONGO("LONGO");
 
 	private String valor;
 
-
-	private Aparencia() {
+	private TipoCabeloEnum() {
 	}
 
-	
-	private Aparencia(String valor) {
+	private TipoCabeloEnum(String valor) {
 		this.valor = valor;
 	}
-	
+
 	public String getValor() {
 		return valor;
 	}
-
-
 
 	public void setValor(String valor) {
 		this.valor = valor;

@@ -2,13 +2,13 @@ package com.gp.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Personagem  implements Serializable  {
@@ -18,24 +18,26 @@ public class Personagem  implements Serializable  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	
+	@Column(nullable = false, length = 150)
 	private String nome;
+	@Column(nullable = false, length = 20)
 	private String sexo;
 	
-	@OneToOne
-	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
+	@ManyToOne
+	@JoinColumn(name = "usuario_id", referencedColumnName = "id" , nullable = false)
 	private Usuario usuario;
 	
 	@ManyToOne
-	@JoinColumn( name = "rosto_id")
+	@JoinColumn( name = "rosto_id" , nullable = false)
+	
 	private Rosto rosto;
 	
 	@ManyToOne
-	@JoinColumn( name = "classe_id")
+	@JoinColumn( name = "classe_id", nullable = false)
 	private Classe classe;
 	
 	@ManyToOne
-	@JoinColumn( name = "corpo_id")
+	@JoinColumn( name = "corpo_id" , nullable = false)
 	private Corpo corpo;
 	
 

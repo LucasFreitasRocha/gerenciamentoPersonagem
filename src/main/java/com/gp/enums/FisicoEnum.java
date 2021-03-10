@@ -1,24 +1,28 @@
 package com.gp.enums;
 
-public enum TipoCabelo {
-	
-	RASPADO("RASPADO"),
-	CURTO("CURTO"),
-	MEDIO("MEDIO"),
-	LONGO("LONGO");
+public enum FisicoEnum {
 
+	MAGRO("MAGRO"),
+	ACIMA_DO_PESO("ACIMAPESO"),
+	MUSCULOSO("MUSCULOSO");
+	
+	
 	private String valor;
 
-	private TipoCabelo() {
+
+	private FisicoEnum() {
 	}
 
-	private TipoCabelo(String valor) {
+	
+	private FisicoEnum(String valor) {
 		this.valor = valor;
 	}
-
+	
 	public String getValor() {
 		return valor;
 	}
+
+
 
 	public void setValor(String valor) {
 		this.valor = valor;

@@ -1,20 +1,19 @@
 package com.gp.enums;
 
-public enum Fisico {
+public enum SexoEnum {
 
-	MAGRO("MAGRO"),
-	ACIMA_DO_PESO("ACIMAPESO"),
-	MUSCULOSO("MUSCULOSO");
-	
+	MASCULINO("MASCULINO"),
+	FEMINIO("FEMININO"),
+	OUTROS("OUTROS");
 	
 	private String valor;
 
 
-	private Fisico() {
+	private SexoEnum() {
 	}
 
 	
-	private Fisico(String valor) {
+	private SexoEnum(String valor) {
 		this.valor = valor;
 	}
 	

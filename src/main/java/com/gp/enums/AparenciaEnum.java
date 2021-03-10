@@ -1,19 +1,18 @@
 package com.gp.enums;
 
-public enum Armadura {
+public enum AparenciaEnum {
 	
-	LEVE("LEVE"),
-	COURO("COURO"),
-	PESADA("PESADA");
-	
+	MASCULINA("MASCULINA"),
+	FEMINIA("FEMINIA");
+
 	private String valor;
 
 
-	private Armadura() {
+	private AparenciaEnum() {
 	}
 
 	
-	private Armadura(String valor) {
+	private AparenciaEnum(String valor) {
 		this.valor = valor;
 	}
 	
@@ -26,6 +25,5 @@ public enum Armadura {
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
-
 
 }

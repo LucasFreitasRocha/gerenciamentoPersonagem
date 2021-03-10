@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,8 +18,11 @@ public class Corpo implements Serializable  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(nullable = false, length = 20)
 	private String aparencia;
+	@Column(nullable = false, length = 20)
 	private String fisico;
+	@Column(nullable = false, length = 20)
 	private String armadura;
 	
 	@OneToMany(mappedBy = "corpo")

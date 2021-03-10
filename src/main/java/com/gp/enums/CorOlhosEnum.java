@@ -1,19 +1,19 @@
 package com.gp.enums;
 
-public enum TipoClasse {
-	
-	MAGO("MAGO"),
-	LADINO("LADINO"),
-	GUERREIRO("GUERREIRO");
+public enum CorOlhosEnum {
+
+	PETRO("PETRO"),
+	AZUL("AZUL"),
+	CASTANHO("CASTANHO");
 	
 	private String valor;
 
 
-	private TipoClasse() {
+	private CorOlhosEnum() {
 	}
 
 	
-	private TipoClasse(String valor) {
+	private CorOlhosEnum(String valor) {
 		this.valor = valor;
 	}
 	
@@ -26,6 +26,5 @@ public enum TipoClasse {
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
-
 
 }

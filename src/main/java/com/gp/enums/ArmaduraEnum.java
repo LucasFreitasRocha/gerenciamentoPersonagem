@@ -1,23 +1,19 @@
 package com.gp.enums;
 
-public enum CorCabelo {
-
-	PETRO("PETRO"),
-	lOIRO("LOIRO"),
-	RUIVO("RUIVO");
+public enum ArmaduraEnum {
+	
+	LEVE("LEVE"),
+	COURO("COURO"),
+	PESADA("PESADA");
 	
 	private String valor;
-	
-	
-
-	
 
 
-	private CorCabelo() {
+	private ArmaduraEnum() {
 	}
 
 	
-	private CorCabelo(String valor) {
+	private ArmaduraEnum(String valor) {
 		this.valor = valor;
 	}
 	
@@ -31,5 +27,5 @@ public enum CorCabelo {
 		this.valor = valor;
 	}
 
-	
+
 }
