@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import com.gp.enums.CorCabeloEnum;
 import com.gp.enums.TipoCabeloEnum;
@@ -23,14 +24,17 @@ public class Rosto implements Serializable  {
 
 	@Column(nullable = false, length = 20)
 	@Enumerated(EnumType.STRING)
+	@NotNull(message = "Cor de cabelo obrigatorio")
 	private CorCabeloEnum corCabelo;
 
 	@Column(nullable = false, length = 20)
 	@Enumerated(EnumType.STRING)
+	@NotNull(message = "tamanho do cabelo obrigatorio")
 	private TipoCabeloEnum tipoCabelo;
 
 	@Column(nullable = false, length = 20)
 	@Enumerated(EnumType.STRING)
+	@NotNull(message = "Cor de olho obrigatorio")
 	private CorCabeloEnum corOlhos;
 	
 	
