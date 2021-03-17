@@ -1,15 +1,18 @@
 package com.gp.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import com.gp.enums.AparenciaEnum;
 
 @Entity
 public class Corpo implements Serializable  {
@@ -19,20 +22,21 @@ public class Corpo implements Serializable  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(nullable = false, length = 20)
-	private String aparencia;
+	@Enumerated(EnumType.STRING)
+	@NotNull(message = "Escolha pelo menos uma aparencia")
+	private AparenciaEnum aparencia;
 	@Column(nullable = false, length = 20)
+	@NotBlank(message = "Escolha um fisco")
 	private String fisico;
 	@Column(nullable = false, length = 20)
 	private String armadura;
-	
-	@OneToMany(mappedBy = "corpo")
-	private List<Personagem> personagens = new ArrayList<>();
+
 
 	public Corpo() {
 		super();
 	}
 
-	public Corpo(String aparencia, String fisico, String armadura) {
+	public Corpo(AparenciaEnum aparencia, String fisico, String armadura) {
 		super();
 		this.aparencia = aparencia;
 		this.fisico = fisico;
@@ -47,11 +51,11 @@ public class Corpo implements Serializable  {
 		this.id = id;
 	}
 
-	public String getAparencia() {
+	public AparenciaEnum getAparencia() {
 		return aparencia;
 	}
 
-	public void setAparencia(String aparencia) {
+	public void setAparencia(AparenciaEnum aparencia) {
 		this.aparencia = aparencia;
 	}
 
@@ -71,13 +75,7 @@ public class Corpo implements Serializable  {
 		this.armadura = armadura;
 	}
 
-	public List<Personagem> getPersonagens() {
-		return personagens;
-	}
-
-	public void setPersonagens(List<Personagem> personagens) {
-		this.personagens = personagens;
-	}
+	
 
 	@Override
 	public int hashCode() {

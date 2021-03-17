@@ -14,6 +14,12 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.br.CPF;
+
+import com.gp.annotation.EmailValidation;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Usuario implements Serializable  {
@@ -23,16 +29,23 @@ public class Usuario implements Serializable  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(nullable = false, length = 150)
+	@NotBlank(message = "Nome obrigatório.")
 	private String nome;
 	@Column(nullable = false, unique = true, updatable = false, length = 15)
+	@CPF(message = "CPF inválido.")
 	private String cpf;
 	@Column ( nullable = false ,length = 3)
+	@NotNull(message = "Diga a sua idade")
 	private Integer idade;
 	@Column(nullable = false, length = 50 , unique= true)
+	@NotNull(message = "Email obrigatório.")
+	  @EmailValidation(message = "Email inválido.")
 	private String email;
-	@Column(nullable = false, length = 20)
+	@Column(nullable = true,  length = 20)
+	
 	private String telefone;
 	@Column(nullable = false)
+	@NotBlank(message = "senha obrigatoria.")
 	private String senha;
 	
 	@OneToMany(mappedBy = "usuario" , cascade = CascadeType.REMOVE)

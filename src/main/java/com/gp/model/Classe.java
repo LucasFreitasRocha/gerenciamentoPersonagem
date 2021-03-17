@@ -1,15 +1,17 @@
 package com.gp.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
+import com.gp.enums.TipoClasseEnum;
 
 @Entity
 public class Classe implements Serializable  {
@@ -19,7 +21,9 @@ public class Classe implements Serializable  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(nullable = false, length = 20)
-	private String tipoClasse;
+	@Enumerated(EnumType.STRING)
+	@NotNull(message = "escolha uma classe")
+	private TipoClasseEnum tipoClasse;
 	@Column(nullable = false, length = 2)
 	private Integer forca;
 	@Column(nullable = false, length = 2)
@@ -28,8 +32,7 @@ public class Classe implements Serializable  {
 	private Integer agilidade;
 	
 
-	@OneToMany(mappedBy = "classe")
-	private List<Personagem> personagens = new ArrayList<>();
+
 
 
 	public Classe() {
@@ -37,14 +40,12 @@ public class Classe implements Serializable  {
 	}
 
 
-	public Classe(String tipoClasse, Integer forca, Integer inteligencia, Integer agilidade,
-			List<Personagem> personagens) {
+	public Classe(TipoClasseEnum tipoClasse, Integer forca, Integer inteligencia, Integer agilidade) {
 		super();
 		this.tipoClasse = tipoClasse;
 		this.forca = forca;
 		this.inteligencia = inteligencia;
 		this.agilidade = agilidade;
-		this.personagens = personagens;
 	}
 
 
@@ -58,12 +59,12 @@ public class Classe implements Serializable  {
 	}
 
 
-	public String getTipoClasse() {
+	public TipoClasseEnum getTipoClasse() {
 		return tipoClasse;
 	}
 
 
-	public void setTipoClasse(String tipoClasse) {
+	public void setTipoClasse(TipoClasseEnum tipoClasse) {
 		this.tipoClasse = tipoClasse;
 	}
 
@@ -98,14 +99,7 @@ public class Classe implements Serializable  {
 	}
 
 
-	public List<Personagem> getPersonagens() {
-		return personagens;
-	}
 
-
-	public void setPersonagens(List<Personagem> personagens) {
-		this.personagens = personagens;
-	}
 
 
 	@Override

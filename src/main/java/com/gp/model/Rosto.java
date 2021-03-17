@@ -1,15 +1,17 @@
 package com.gp.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
+import com.gp.enums.CorCabeloEnum;
+import com.gp.enums.TipoCabeloEnum;
 
 @Entity
 public class Rosto implements Serializable  {
@@ -20,23 +22,25 @@ public class Rosto implements Serializable  {
 	private Long id;
 
 	@Column(nullable = false, length = 20)
-	private String corCabelo;
+	@Enumerated(EnumType.STRING)
+	private CorCabeloEnum corCabelo;
 
 	@Column(nullable = false, length = 20)
-	private String tipoCabelo;
+	@Enumerated(EnumType.STRING)
+	private TipoCabeloEnum tipoCabelo;
 
 	@Column(nullable = false, length = 20)
-	private String corOlhos;
+	@Enumerated(EnumType.STRING)
+	private CorCabeloEnum corOlhos;
 	
-	@OneToMany(mappedBy = "rosto")
-	private List<Personagem> personagens = new ArrayList<>();
+	
 	
 	public Rosto() {
 		super();
 	}
 
 
-	public Rosto(String corCabelo, String tipoCabelo, String corOlhos) {
+	public Rosto(CorCabeloEnum corCabelo, TipoCabeloEnum tipoCabelo, CorCabeloEnum corOlhos) {
 		super();
 		this.corCabelo = corCabelo;
 		this.tipoCabelo = tipoCabelo;
@@ -54,45 +58,38 @@ public class Rosto implements Serializable  {
 	}
 
 
-	public String getCorCabelo() {
+	public CorCabeloEnum getCorCabelo() {
 		return corCabelo;
 	}
 
 
-	public void setCorCabelo(String corCabelo) {
+	public void setCorCabelo(CorCabeloEnum corCabelo) {
 		this.corCabelo = corCabelo;
 	}
 
 
-	public String getTipoCabelo() {
+	public TipoCabeloEnum getTipoCabelo() {
 		return tipoCabelo;
 	}
 
 
-	public void setTipoCabelo(String tipoCabelo) {
+	public void setTipoCabelo(TipoCabeloEnum tipoCabelo) {
 		this.tipoCabelo = tipoCabelo;
 	}
 
 
-	public String getCorOlhos() {
+	public CorCabeloEnum getCorOlhos() {
 		return corOlhos;
 	}
 
 
-	public void setCorOlhos(String corOlhos) {
+	public void setCorOlhos(CorCabeloEnum corOlhos) {
 		this.corOlhos = corOlhos;
 	}
 
 
 
-	public List<Personagem> getPersonagens() {
-		return personagens;
-	}
-
-
-	public void setPersonagens(List<Personagem> personagens) {
-		this.personagens = personagens;
-	}
+	
 
 
 	@Override
