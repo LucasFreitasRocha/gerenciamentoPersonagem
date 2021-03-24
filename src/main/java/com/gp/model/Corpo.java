@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.gp.enums.AparenciaEnum;
+import com.gp.enums.ArmaduraEnum;
 
 @Entity
 public class Corpo implements Serializable  {
@@ -29,14 +30,14 @@ public class Corpo implements Serializable  {
 	@NotBlank(message = "Escolha um fisco")
 	private String fisico;
 	@Column(nullable = false, length = 20)
-	private String armadura;
+	private ArmaduraEnum armadura;
 
 
 	public Corpo() {
 		super();
 	}
 
-	public Corpo(AparenciaEnum aparencia, String fisico, String armadura) {
+	public Corpo(AparenciaEnum aparencia, String fisico, ArmaduraEnum armadura) {
 		super();
 		this.aparencia = aparencia;
 		this.fisico = fisico;
@@ -67,12 +68,12 @@ public class Corpo implements Serializable  {
 		this.fisico = fisico;
 	}
 
-	public String getArmadura() {
+	public ArmaduraEnum getArmadura() {
 		return armadura;
 	}
 
-	public void setArmadura(String armadura) {
-		this.armadura = armadura;
+	public void setArmadura(ArmaduraEnum pesada) {
+		this.armadura = pesada;
 	}
 
 	

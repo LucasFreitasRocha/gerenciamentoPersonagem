@@ -14,12 +14,14 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.gp.annotation.EmailValidation;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Usuario implements Serializable  {
@@ -30,22 +32,25 @@ public class Usuario implements Serializable  {
 	private Long id;
 	@Column(nullable = false, length = 150)
 	@NotBlank(message = "Nome obrigatório.")
+	@Size(max = 150)
 	private String nome;
 	@Column(nullable = false, unique = true, updatable = false, length = 15)
 	@CPF(message = "CPF inválido.")
 	private String cpf;
 	@Column ( nullable = false ,length = 3)
 	@NotNull(message = "Diga a sua idade")
+	@Length(min = 1 , max = 99 , message = "informe a idade entre 1 e 99 anos")
 	private Integer idade;
 	@Column(nullable = false, length = 50 , unique= true)
 	@NotNull(message = "Email obrigatório.")
 	  @EmailValidation(message = "Email inválido.")
 	private String email;
 	@Column(nullable = true,  length = 20)
-	
+	@Size(min = 10, max = 20)
 	private String telefone;
 	@Column(nullable = false)
 	@NotBlank(message = "senha obrigatoria.")
+	@Length(min = 8 , max = 20, message = "a senha deve no minimo 8 e no maximo 20")
 	private String senha;
 	
 	@OneToMany(mappedBy = "usuario" , cascade = CascadeType.REMOVE)

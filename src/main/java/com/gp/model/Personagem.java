@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.gp.enums.SexoEnum;
 
@@ -26,8 +27,10 @@ public class Personagem implements Serializable {
 	private Long id;
 
 	@Column(nullable = false, length = 150)
+	@Size(max = 20)
 	private String nome;
 	@Column(nullable = false, length = 20)
+	
 	@Enumerated(EnumType.STRING)
 	@Valid
 	@NotNull(message = "Escolha um genero.")
@@ -35,6 +38,7 @@ public class Personagem implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
+	@NotNull(message = "informe o usuario")
 	private Usuario usuario;
 
 	@ManyToOne(cascade = CascadeType.REMOVE)

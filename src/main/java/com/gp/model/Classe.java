@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.gp.enums.TipoClasseEnum;
 
 @Entity
@@ -25,10 +27,13 @@ public class Classe implements Serializable  {
 	@NotNull(message = "escolha uma classe")
 	private TipoClasseEnum tipoClasse;
 	@Column(nullable = false, length = 2)
+	@Length(max = 2)
 	private Integer forca;
 	@Column(nullable = false, length = 2)
+	@Length(max = 2)
 	private Integer inteligencia;
 	@Column(nullable = false, length = 2)
+	@Length(max = 2)
 	private Integer agilidade;
 	
 
