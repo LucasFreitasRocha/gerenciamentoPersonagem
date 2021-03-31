@@ -3,7 +3,7 @@ package com.gp.enums;
 public enum AparenciaEnum {
 	
 	MASCULINA("MASCULINA"),
-	FEMINIA("FEMINIA");
+	FEMININA("FEMININA");
 
 	private String valor;
 

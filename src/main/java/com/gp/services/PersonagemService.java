@@ -3,21 +3,29 @@ package com.gp.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gp.dto.PersonagemDTO;
 import com.gp.enums.AparenciaEnum;
 import com.gp.enums.ArmaduraEnum;
 import com.gp.exceptions.ObjectNotFoundException;
 import com.gp.model.Personagem;
+import com.gp.model.Usuario;
 import com.gp.repository.PersonagemRepository;
 
 @Service
 public class PersonagemService {
 	@Autowired
 	private PersonagemRepository repo;
+	@Autowired
+	private UsuarioService usuarioService;
 
-	public List<Personagem> index() {
+			
+
+	public List<Personagem> findAll() {
 		return repo.findAll();
 	}
 
@@ -25,30 +33,38 @@ public class PersonagemService {
 		Optional<Personagem> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Personagem não encontrado com esse id: " + id));
 	}
-
-	public Personagem create(Personagem personagem) {
+	@Transactional
+	public Personagem create(PersonagemDTO personagemDTO) {
+		Personagem personagem = new Personagem(personagemDTO);
+		Usuario usuario = usuarioService.find(personagemDTO.getUsuarioId());
+		personagem.setUsuario(usuario);
 		updateAtributos(personagem);
 		try {
+			personagem.setClasse(personagem.getClasse());
 			return repo.save(personagem);
 		} catch (Exception e) {
-			throw new RuntimeException("Falha ao salvar o personagem.");
+			throw new RuntimeException("Falha ao salvar o personagem." + e);
 		}
 	}
 
-	public void update(Long id, Personagem personagem) {
-		find(id);
+	public void update(Long id, PersonagemDTO personagemDTO) {
+		Personagem personagem = find(id);
+		personagem.update(personagemDTO);
 		updateAtributos(personagem);
 		personagem.setId(id);
 		repo.save(personagem);
 	}
 
-	public void delete(Long id, Personagem personagem) {
-		find(id);
-		personagem.setId(id);
+	public void delete(Long id) {
+		Personagem personagem = find(id);
+		
 		repo.delete(personagem);
 	}
 
 	private Personagem updateAtributos(Personagem personagem) {
+		
+		
+		
 		switch (personagem.getClasse().getTipoClasse()) {
 		case GUERREIRO:
 			personagem.getClasse().setForca(10);
@@ -65,7 +81,7 @@ public class PersonagemService {
 		case LADINO:
 			personagem.getClasse().setForca(6);
 			personagem.getClasse().setAgilidade(10);
-			personagem.getClasse().setInteligencia(6);
+			personagem.getClasse().setInteligencia(8);
 			personagem.getCorpo().setArmadura(ArmaduraEnum.LEVE);
 			break;
 
@@ -74,8 +90,8 @@ public class PersonagemService {
 		case MASCULINO:
 			personagem.getCorpo().setAparencia(AparenciaEnum.MASCULINA);
 			break;
-		case FEMINIO:
-			personagem.getCorpo().setAparencia(AparenciaEnum.FEMINIA);
+		case FEMININO:
+			personagem.getCorpo().setAparencia(AparenciaEnum.FEMININA);
 			break;
 		case OUTROS:
 			break;
@@ -84,6 +100,11 @@ public class PersonagemService {
 		}
 	
 		return personagem;
+	}
+
+	public List<Personagem> findByUsuario(Long usuarioId) {
+		Usuario usuario = usuarioService.find(usuarioId);
+		return repo.findByUsuario(usuario);
 	}
 
 }

@@ -1,55 +1,44 @@
 package com.gp.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.gp.enums.AparenciaEnum;
 import com.gp.enums.ArmaduraEnum;
+import com.gp.enums.FisicoEnum;
 
-@Entity
-public class Corpo implements Serializable  {
+@Embeddable
+public class Corpo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+
 	@Column(nullable = false, length = 20)
 	@Enumerated(EnumType.STRING)
 	@NotNull(message = "Escolha pelo menos uma aparencia")
 	private AparenciaEnum aparencia;
 	@Column(nullable = false, length = 20)
-	@NotBlank(message = "Escolha um fisco")
-	private String fisico;
+	@NotNull(message = "Escolha um fisco")
+	@Enumerated(EnumType.STRING)
+	private FisicoEnum fisico;
 	@Column(nullable = false, length = 20)
+	@Enumerated(EnumType.STRING)
 	private ArmaduraEnum armadura;
-
 
 	public Corpo() {
 		super();
 	}
 
-	public Corpo(AparenciaEnum aparencia, String fisico, ArmaduraEnum armadura) {
+	public Corpo(AparenciaEnum aparencia, FisicoEnum fisico, ArmaduraEnum armadura) {
 		super();
 		this.aparencia = aparencia;
 		this.fisico = fisico;
 		this.armadura = armadura;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public AparenciaEnum getAparencia() {
@@ -60,11 +49,11 @@ public class Corpo implements Serializable  {
 		this.aparencia = aparencia;
 	}
 
-	public String getFisico() {
+	public FisicoEnum getFisico() {
 		return fisico;
 	}
 
-	public void setFisico(String fisico) {
+	public void setFisico(FisicoEnum fisico) {
 		this.fisico = fisico;
 	}
 
@@ -76,14 +65,14 @@ public class Corpo implements Serializable  {
 		this.armadura = pesada;
 	}
 
-	
-
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+		int hash = 5;
+		hash = 37 * hash + Objects.hashCode(this.armadura);
+
+		hash = 37 * hash + Objects.hashCode(this.aparencia);
+		hash = 37 * hash + Objects.hashCode(this.fisico);
+		return hash;
 	}
 
 	@Override
@@ -95,14 +84,10 @@ public class Corpo implements Serializable  {
 		if (getClass() != obj.getClass())
 			return false;
 		Corpo other = (Corpo) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		if (this.armadura != other.armadura && this.aparencia != other.aparencia && this.fisico != other.fisico)
 			return false;
+
 		return true;
 	}
 
-	
-	
 }

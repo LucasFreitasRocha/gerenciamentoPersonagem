@@ -2,8 +2,8 @@ package com.gp.model;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,6 +16,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.gp.dto.PersonagemDTO;
 import com.gp.enums.SexoEnum;
 
 @Entity
@@ -36,25 +38,24 @@ public class Personagem implements Serializable {
 	@NotNull(message = "Escolha um genero.")
 	private SexoEnum sexo;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
 	@NotNull(message = "informe o usuario")
 	private Usuario usuario;
 
-	@ManyToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "rosto_id", nullable = false)
+	
+	@Embedded
 	@Valid
 	@NotNull(message = "Escolha uma rosto.")
 	private Rosto rosto;
 
-	@ManyToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "classe_id", nullable = false)
+	@Embedded
 	@Valid
 	@NotNull(message = "Escolha uma classe.")
 	private Classe classe;
 
-	@ManyToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "corpo_id", nullable = false)
+	@Embedded
 	@Valid
 	@NotNull(message = "Escolha um corpo.")
 	private Corpo corpo;
@@ -67,6 +68,32 @@ public class Personagem implements Serializable {
 		super();
 		this.nome = nome;
 		this.sexo = sexo;
+	}
+
+	public Personagem(PersonagemDTO personagemDTO) {
+		this.nome = personagemDTO.getNome();
+		this.sexo = personagemDTO.getSexo();
+		this.corpo = new Corpo();
+		this.classe = new Classe();
+		this.rosto = new Rosto();
+		this.corpo.setAparencia(personagemDTO.getAparencia());
+		this.classe.setTipoClasse(personagemDTO.getTipoClasse());
+		this.rosto.setCorCabelo(personagemDTO.getCorCabelo());
+		this.rosto.setCorOlhos(personagemDTO.getCorOlhos());
+		this.rosto.setTipoCabelo(personagemDTO.getTipoCabelo());
+		this.corpo.setFisico(personagemDTO.getFisico());
+		
+	}
+	public void update(PersonagemDTO personagemDTO) {
+		this.nome = personagemDTO.getNome();
+		this.sexo = personagemDTO.getSexo();
+		this.corpo.setAparencia(personagemDTO.getAparencia());
+		this.classe.setTipoClasse(personagemDTO.getTipoClasse());
+		this.rosto.setCorCabelo(personagemDTO.getCorCabelo());
+		this.rosto.setCorOlhos(personagemDTO.getCorOlhos());
+		this.rosto.setTipoCabelo(personagemDTO.getTipoCabelo());
+		this.corpo.setFisico(personagemDTO.getFisico());
+		
 	}
 
 	public Long getId() {
@@ -149,5 +176,7 @@ public class Personagem implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 
 }

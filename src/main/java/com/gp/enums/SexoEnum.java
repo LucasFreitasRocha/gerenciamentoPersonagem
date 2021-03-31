@@ -3,7 +3,7 @@ package com.gp.enums;
 public enum SexoEnum {
 
 	MASCULINO("MASCULINO"),
-	FEMINIO("FEMININO"),
+	FEMININO("FEMININO"),
 	OUTROS("OUTROS");
 	
 	private String valor;
