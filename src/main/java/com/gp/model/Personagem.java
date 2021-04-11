@@ -30,6 +30,7 @@ public class Personagem implements Serializable {
 
 	@Column(nullable = false, length = 150)
 	@Size(max = 20)
+	
 	private String nome;
 	@Column(nullable = false, length = 20)
 	

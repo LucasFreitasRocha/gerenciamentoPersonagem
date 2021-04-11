@@ -1,5 +1,9 @@
 package com.gp.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.gp.enums.AparenciaEnum;
 import com.gp.enums.CorCabeloEnum;
 import com.gp.enums.CorOlhosEnum;
@@ -10,13 +14,23 @@ import com.gp.enums.TipoClasseEnum;
 
 public class PersonagemDTO {
 	private Long UsuarioId;
+	@NotNull(message = "escolha uma classe")
 	private TipoClasseEnum tipoClasse;
+	@Size(max = 20)
+	@NotNull(message = "escolha um nome")
+	@NotBlank(message = "Nome não pode ficar em branco")
 	private String nome;
+	@NotNull(message = "Escolha um genero.")
 	private SexoEnum sexo;
+	@NotNull(message = "Escolha pelo menos uma aparencia")
 	private AparenciaEnum aparencia;
+	@NotNull(message = "Cor de cabelo obrigatorio")
 	private CorCabeloEnum corCabelo;
+	@NotNull(message = "Cor de olho obrigatorio")
 	private CorOlhosEnum corOlhos;
+	@NotNull(message = "tamanho do cabelo obrigatorio")
 	private TipoCabeloEnum TipoCabelo;
+	@NotNull(message = "Escolha um fisco")
 	private  FisicoEnum fisico;
 	
 	

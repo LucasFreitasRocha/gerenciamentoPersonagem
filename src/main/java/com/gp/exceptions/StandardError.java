@@ -1,10 +1,13 @@
 package com.gp.exceptions;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.http.HttpStatus;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 public class StandardError implements Serializable {
@@ -16,6 +19,8 @@ public class StandardError implements Serializable {
     private String error;
     private String message;
     private String path;
+    private List<FieldsErros> fieldsErros = new ArrayList<>();
+
 
     public StandardError( HttpStatus status, String error, String message, String path) {
         super();
@@ -26,7 +31,9 @@ public class StandardError implements Serializable {
         this.path = path;
     }
 
-    public LocalDateTime getTimestamp() {
+
+
+	public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
@@ -65,4 +72,18 @@ public class StandardError implements Serializable {
     public void setPath(String path) {
         this.path = path;
     }
+
+
+
+	public List<FieldsErros> getFieldsErros() {
+		return fieldsErros;
+	}
+
+
+
+	public void setFieldsErros(List<FieldsErros> fieldsErros) {
+		this.fieldsErros = fieldsErros;
+	}
+
+
 }

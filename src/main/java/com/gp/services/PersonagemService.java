@@ -39,12 +39,10 @@ public class PersonagemService {
 		Usuario usuario = usuarioService.find(personagemDTO.getUsuarioId());
 		personagem.setUsuario(usuario);
 		updateAtributos(personagem);
-		try {
+
 			personagem.setClasse(personagem.getClasse());
 			return repo.save(personagem);
-		} catch (Exception e) {
-			throw new RuntimeException("Falha ao salvar o personagem." + e);
-		}
+	
 	}
 
 	public void update(Long id, PersonagemDTO personagemDTO) {
