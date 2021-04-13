@@ -14,79 +14,81 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gp.dto.PersonagemDTO;
-import com.gp.model.Usuario;
-import com.gp.services.UsuarioService;
+import com.gp.model.Personagem;
+import com.gp.services.PersonagemService;
 
 @Controller
-@RequestMapping(path = "/users")
-public abstract class UsuarioControllerView {
-	@Autowired private UsuarioService service;
-	
+@RequestMapping(path = "/personagens")
+public class PersonagemControllerView {
+	@Autowired
+	private PersonagemService service;
+
 	@GetMapping
 	public String GetAll(Model model) {
-		model.addAttribute("users", service.findAll());
-		return "users/users";
+		model.addAttribute("personagens", service.findAll());
+		return "personagens/personagens";
 	}
 
 	@GetMapping(value = "/novo")
 	public String cadastro(Model model) {
-		model.addAttribute("user", new Usuario());
+		model.addAttribute("personagemDTO", new PersonagemDTO());
 		return "personagens/formPersonagem";
 	}
+
 	@PostMapping(value = "/novo")
-	public String save(@Valid @ModelAttribute Usuario usuario, BindingResult result, Model model) {
+	public String save(@Valid @ModelAttribute PersonagemDTO personagemDTO, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("msgErros", result.getAllErrors());
-			return "users/formUser";
+			return "personagens/formPersonagem";
 
 		}
 		try {
-			service.create(usuario);
-			model.addAttribute("msgSucesso", "Usuario cadastrado com sucesso.");
+			service.create(personagemDTO);
+			model.addAttribute("msgSucesso", "Personagem cadastrado com sucesso.");
 			model.addAttribute("personagemDTO", new PersonagemDTO());
-			return "users/formUser";
+			return "personagens/formPersonagem";
 		} catch (Exception e) {
 			model.addAttribute("msgErros", new ObjectError("Personagem", e.getMessage()));
-			return "users/formUser";
+			return "formPersonagem";
 		}
 
 	}
 	
 	@GetMapping(value = "/show/{id}")
 	public String show(@PathVariable("id") Long id, Model model) {
-		Usuario usuario = service.find(id);
+		Personagem personagem = service.find(id);
 
-		model.addAttribute("usuario", usuario);
-		return "users/usuario";
+		model.addAttribute("personagem", personagem);
+		return "personagens/personagem";
 	}
-	
+
 	@GetMapping(value = "/update/{id}")
 	public String alterar(@PathVariable("id") Long id, Model model) {
-		Usuario usuario = service.find(id);
+		Personagem personagem = service.find(id);
 
-		model.addAttribute("usuario", usuario);
-		return "users/formUser";
+		model.addAttribute("personagemDTO", new PersonagemDTO(personagem));
+		return "personagens/formPersonagem";
 	}
 
 	@PostMapping(path = "/update/{id}")
-	public String update(@Valid @ModelAttribute Usuario usuario, BindingResult result,
+	public String update(@Valid @ModelAttribute PersonagemDTO personagemDTO, BindingResult result,
 			@PathVariable("id") Long id, Model model) {
 		// valores de retorno padão
 
 		if (result.hasErrors()) {
 			model.addAttribute("msgErros", result.getAllErrors());
-			return "users/formUser";
+			return "personagens/formPersonagem";
 		}
 
 		try {
-			service.update(id, usuario);
+			service.update(id, personagemDTO);
 			model.addAttribute("msgSucesso", "Personagem atualizado com sucesso.");
-			model.addAttribute("usuario", usuario);
-			return "users/formUser";
+			model.addAttribute("personagem", personagemDTO);
+			return "personagens/formPersonagem";
 		} catch (Exception e) {
-			model.addAttribute("msgErros", new ObjectError("usuario", e.getMessage()));
-			return "users/formUser";
+			model.addAttribute("msgErros", new ObjectError("Personagem", e.getMessage()));
+			return "personagens/formPersonagem";
 		}
 	}
 

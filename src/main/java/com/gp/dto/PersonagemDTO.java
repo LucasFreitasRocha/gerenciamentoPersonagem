@@ -11,6 +11,7 @@ import com.gp.enums.FisicoEnum;
 import com.gp.enums.SexoEnum;
 import com.gp.enums.TipoCabeloEnum;
 import com.gp.enums.TipoClasseEnum;
+import com.gp.model.Personagem;
 
 public class PersonagemDTO {
 	private Long UsuarioId;
@@ -39,6 +40,33 @@ public class PersonagemDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
+
+
+
+
+
+
+
+	public PersonagemDTO(Personagem personagem) {
+		this.UsuarioId = personagem.getUsuario().getId();
+		this.aparencia = personagem.getCorpo().getAparencia();
+		this.corCabelo = personagem.getRosto().getCorCabelo();
+		this.corOlhos = personagem.getRosto().getCorOlhos();
+		this.fisico = personagem.getCorpo().getFisico();
+		this.nome = personagem.getNome();
+		this.sexo = personagem.getSexo();
+		this.TipoCabelo = personagem.getRosto().getTipoCabelo();
+		this.tipoClasse = personagem.getClasse().getTipoClasse();
+		
+	}
+
+
+
+
+
+
 
 
 

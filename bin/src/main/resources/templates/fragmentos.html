@@ -28,13 +28,13 @@
           </button>
           <div class="collapse navbar-collapse" id="textoNavbar">
               <ul class="navbar-nav mr-auto">
-                  <li class="nav-item" th:classappend="${pagina == 'personagens' ? 'active' : ''}">
-                      <a class="nav-link" th:href="@{~/personagens}">Personagem</a> 
+                  <li class="nav-item" th:classappend="${pagina == 'hoteis' ? 'active' : ''}">
+                      <a class="nav-link" th:href="@{~/persoangens}">Personagem</a> 
                   </li>
-                  <li class="nav-item" th:classappend="${pagina == 'users' ? 'active' : ''}">
+                  <li class="nav-item" th:classappend="${pagina == 'clientes' ? 'active' : ''}">
                       <a class="nav-link" th:href="@{~/users}">Usuario</a> 
                   </li>
-                  <li class="nav-item" th:classappend="${pagina == 'profile' ? 'active' : ''}" >
+                  <li class="nav-item" th:classappend="${pagina == 'funcionarios' ? 'active' : ''}" sec:authorize="hasRole('ROLE_ADMIN')">
                       <a class="nav-link" th:href="@{~/profile}" >Profile</a> 
                   </li>
               </ul>
