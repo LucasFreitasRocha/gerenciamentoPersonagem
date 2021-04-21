@@ -60,7 +60,7 @@ public class Usuario implements Serializable  {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "usuario" , cascade = CascadeType.REMOVE)
 	 @LazyCollection(LazyCollectionOption.FALSE)
-	private List<Personagem> personagens = new ArrayList<>();
+	private List<Personagem> personagens = new ArrayList<>(); 
 	
 	public Usuario() {
 		super();
@@ -74,7 +74,7 @@ public class Usuario implements Serializable  {
 		this.idade = idade;
 		this.email = email;
 		this.telefone = telefone;
-		this.senha = senha;
+		this.senha = senha;  
 	}
 
 

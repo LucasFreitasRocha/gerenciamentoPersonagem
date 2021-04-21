@@ -38,8 +38,8 @@ public class Personagem implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Valid
 	@NotNull(message = "Escolha um genero.")
-	private SexoEnum sexo;
-
+	private SexoEnum sexo;    
+	
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)

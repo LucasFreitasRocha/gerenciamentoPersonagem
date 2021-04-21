@@ -8,19 +8,26 @@
 <body>
   <div th:replace="~{fragmentos :: navbar(pagina='personagens')}" />
   <div class="container">
+    <div class="card-header">
+      <div class="d-flex justify-content-between ">
+        <h4>Personagens</h4>
+        <a class="btn btn-primary " th:href="@{~/personagens/personagem}" role="button">Novo Personagen</a>
+      </div>
+    </div>
+    <div class="card" th:each="p : ${personagens}"  style="margin: 10px 0;">
 
-    <div class="card">
-      <div class="card-header">
-        <div class="d-flex justify-content-between ">
-          <h4>Personagens</h4>
-          <a class="btn btn-primary " th:href="@{~/personagens/novo}" role="button">Novo Personagen</a>
-        </div>
-      </div>
       <div class="card-body">
-        <div th:each="p : ${personagens}">
-          <h4 th:text="${p.nome}"></h4>
-        </div>
+        <h5 class="card-title" th:text="${p.nome}"></h5> 
+        <p>Usuario: </p><p th:text="${p.usuario.nome}"></p>
+        <hr>
+        <a th:href="@{'~/personagens/show/'+${p.id}}" class="btn btn-success">show</a>
+        <a th:href="@{'~/personagens/personagem/'+${p.id}}" class="btn btn-warning">Editar</a>
+        <a th:href="@{'~/personagens/'+${p.id}+'/deletar'}" class="btn btn-danger"
+          onclick="return confirm('Deseja realmente excluir esse personagem?')">Excluir</a>
       </div>
+    
+
+ 
     </div>
   </div>
   <div th:replace="~{fragmentos :: imports-js}" />

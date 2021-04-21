@@ -7,9 +7,99 @@
 
 <body>
   <div th:replace="~{fragmentos :: navbar(pagina='personagens')}" />
-    <div class="container">
-      <h1>Form Personagen</h1>
+  <div class="container">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="d-flex justify-content-between ">
+          <h4>Fomrulario personagem</h4>
+          <a class="btn btn-primary " th:href="@{~/personagens}" role="button">voltar</a>
+        </div>
+      </div>
+      <div th:replace="~{fragmentos :: mensagens}"></div>
+      <div class="card-body">
+        <form th:object="${personagemDTO}" th:action="@{~/personagens/personagem/{id}(id=${personagemDTO.id})}"
+          method="post">
+          <input type="hidden" th:field="*{id}" />
+          <input type="hidden"  th:field="*{UsuarioId}"/>
+      
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="nome">Nome:</label>
+              <input th:field="*{nome}" type="text" class="form-control" placeholder="Nome" required="required"
+                maxlength="20" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="">Tipo de classe:</label>
+              <select name="tipoClasse" th:field="*{tipoClasse}">
+                <option th:each="classe : ${T(com.gp.enums.TipoClasseEnum).values()}" th:value="${classe}"
+                  th:text="${classe}">
+                </option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="">Genero: </label>
+              <select name="sexo" th:field="*{sexo}">
+                <option th:each="sexo : ${T(com.gp.enums.SexoEnum).values()}" th:value="${sexo}" th:text="${sexo}">
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="">Aparencia: </label>
+              <select name="aparencia" th:field="*{aparencia}">
+                <option th:each="aparencia : ${T(com.gp.enums.AparenciaEnum).values()}" th:value="${aparencia}"
+                  th:text="${aparencia}">
+                </option>
+              </select>
+            </div>
+
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label for="">Tipo de Cabelo: </label>
+              <select name="TipoCabelo" th:field="*{TipoCabelo}">
+                <option th:each="TipoCabelo : ${T(com.gp.enums.TipoCabeloEnum).values()}" th:value="${TipoCabelo}"
+                  th:text="${TipoCabelo}">
+                </option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="">Cor do Cabelo: </label>
+              <select name="corCabelo" th:field="*{corCabelo}">
+                <option th:each="corCabelo : ${T(com.gp.enums.CorCabeloEnum).values()}" th:value="${corCabelo}"
+                  th:text="${corCabelo}">
+                </option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="">Cor dos olhos: </label>
+              <select name="corOlhos" th:field="*{corOlhos}">
+                <option th:each="corOlhos : ${T(com.gp.enums.CorOlhosEnum).values()}" th:value="${corOlhos}"
+                  th:text="${corOlhos}">
+                </option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="">Fisico: </label>
+              <select name="fisico" th:field="*{fisico}">
+                <option th:each="fisico : ${T(com.gp.enums.FisicoEnum).values()}" th:value="${fisico}"
+                  th:text="${fisico}">
+                </option>
+              </select>
+            </div>
+          </div>
+      </div>
+      <div class="card-footer">
+        <input type="submit" class="btn btn-success" value="salvar" />
+      </div>
+      </form>
     </div>
+  </div>
+
+  </div>
 </body>
 
 </html>

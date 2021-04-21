@@ -21,11 +21,11 @@ public class Classe implements Serializable  {
 	@Column(nullable = false, length = 20)
 	@Enumerated(EnumType.STRING)
 	@NotNull(message = "escolha uma classe")
-	private TipoClasseEnum tipoClasse;
+	private TipoClasseEnum tipoClasse; 
 	@Column(nullable = false, length = 2)
 	@Max(value = 10)
 	@Min(value = 6)
-	private Integer forca;
+	private Integer forca; 
 	@Column(nullable = false, length = 2)
 	@Max(value = 10)
 	@Min(value = 6)
@@ -33,7 +33,7 @@ public class Classe implements Serializable  {
 	@Column(nullable = false, length = 2)
 	@Max(value = 10)
 	@Min(value = 6)
-	private Integer agilidade;
+	private Integer agilidade; 
 	
 
 

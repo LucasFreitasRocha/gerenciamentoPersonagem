@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragmentos :: imports-css(title='Gerenciamento de personagem')}">
+  <title>title</title>
+</head>
+
+<body>
+  <div th:replace="~{fragmentos :: navbar(pagina='personagens')}" />
+  <div class="container">
+    <div class="card" style=" margin-bottom: 20px;  ">
+      <div class="card-header">
+        <div class="d-flex justify-content-between ">
+          <h4  th:text="${personagem.nome}"></h4>
+          <a class="btn btn-primary " th:href="@{~/personagens}" role="button">voltar</a>
+        </div>
+      </div>
+      <div class="card-body">
+        <strong>sexo: </strong> <p th:text="${personagem.sexo}"></p>
+        <div class="row d-flex justify-content-center"> <h4>Rosto</h4></div>
+        <div class="row">
+          <div class="col"> <strong>Cor Dos olhos</strong> <p th:text="${personagem.rosto.corOlhos}"></p></div>
+          <div class="col"> <strong>Cor Do Cabelo</strong> <p th:text="${personagem.rosto.corCabelo}"></p></div>
+          <div class="col"> <strong>tipo Cabelo</strong> <p th:text="${personagem.rosto.tipoCabelo}"></p></div>
+        </div>
+        <div class="row d-flex justify-content-center"> <h4>Classe </h4> </div>
+        <div class="row">
+          <div class="col">
+            <strong>Tipo</strong> <p th:text="${personagem.classe.tipoClasse}"></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <strong>Força:</strong> <p th:text="${personagem.classe.forca}"></p>
+          </div>
+          <div class="col">
+            <strong>Inteligencia:</strong> <p th:text="${personagem.classe.inteligencia}"></p>
+          </div>
+          <div class="col">
+            <strong>Agilidade:</strong> <p th:text="${personagem.classe.agilidade}"></p>
+          </div>
+        </div>
+       
+       
+        <div class="row d-flex justify-content-center"> <h4>Corpo </h4> </div>
+        <div class="row">
+          <div class="col">
+            <strong>Aparencia:</strong> <p th:text="${personagem.corpo.aparencia}"></p>
+          </div>
+          <div class="col">
+            <strong>Fisico:</strong> <p th:text="${personagem.corpo.fisico}"></p>
+          </div>
+          <div class="col">
+            <strong>Armadura:</strong> <p th:text="${personagem.corpo.armadura}"></p>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <a th:href="@{'~/personagens/personagem/'+${personagem.id}}" class="btn btn-warning">Editar</a>
+    </div>
+    
+  </div>
+</body>
+</html>

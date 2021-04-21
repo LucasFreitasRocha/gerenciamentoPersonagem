@@ -29,13 +29,18 @@ public class PersonagemControllerView {
 		return "personagens/personagens";
 	}
 
-	@GetMapping(value = "/novo")
+	@GetMapping(value = "/personagem")
 	public String cadastro(Model model) {
-		model.addAttribute("personagemDTO", new PersonagemDTO());
-		return "personagens/formPersonagem";
+		PersonagemDTO personagemDTO = new PersonagemDTO();
+		/*setando o id do usuario de forma manual enquanto não 
+		 * implementa a parte de session para pergar o id do usuario da sessão
+		 */
+		personagemDTO.setUsuarioId((long) 1);
+	
+		model.addAttribute("personagemDTO", personagemDTO);
+		return "personagens/formPersonagem"; 
 	}
-
-	@PostMapping(value = "/novo")
+	@PostMapping(value = "/personagem")
 	public String save(@Valid @ModelAttribute PersonagemDTO personagemDTO, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
@@ -50,7 +55,7 @@ public class PersonagemControllerView {
 			return "personagens/formPersonagem";
 		} catch (Exception e) {
 			model.addAttribute("msgErros", new ObjectError("Personagem", e.getMessage()));
-			return "formPersonagem";
+			return "personagens/formPersonagem";
 		}
 
 	}
@@ -60,10 +65,10 @@ public class PersonagemControllerView {
 		Personagem personagem = service.find(id);
 
 		model.addAttribute("personagem", personagem);
-		return "personagens/personagem";
+		return "personagens/personagem";  
 	}
 
-	@GetMapping(value = "/update/{id}")
+	@GetMapping(value = "/personagem/{id}")
 	public String alterar(@PathVariable("id") Long id, Model model) {
 		Personagem personagem = service.find(id);
 
@@ -71,9 +76,10 @@ public class PersonagemControllerView {
 		return "personagens/formPersonagem";
 	}
 
-	@PostMapping(path = "/update/{id}")
+	@PostMapping(path = "/personagem/{id}")
 	public String update(@Valid @ModelAttribute PersonagemDTO personagemDTO, BindingResult result,
 			@PathVariable("id") Long id, Model model) {
+		System.out.println("o id: " + id);
 		// valores de retorno padão
 
 		if (result.hasErrors()) {
@@ -82,6 +88,7 @@ public class PersonagemControllerView {
 		}
 
 		try {
+			System.out.println("o id: " + id);
 			service.update(id, personagemDTO);
 			model.addAttribute("msgSucesso", "Personagem atualizado com sucesso.");
 			model.addAttribute("personagem", personagemDTO);

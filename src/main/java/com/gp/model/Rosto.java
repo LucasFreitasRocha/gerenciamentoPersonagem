@@ -27,7 +27,7 @@ public class Rosto implements Serializable  {
 	@Column(nullable = false, length = 20)
 	@Enumerated(EnumType.STRING)
 	@NotNull(message = "tamanho do cabelo obrigatorio")
-	private TipoCabeloEnum tipoCabelo;
+	private TipoCabeloEnum tipoCabelo; 
 
 	@Column(nullable = false, length = 20)
 	@Enumerated(EnumType.STRING)

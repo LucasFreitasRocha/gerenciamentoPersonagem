@@ -18,37 +18,37 @@ import com.gp.model.Usuario;
 import com.gp.services.UsuarioService;
 
 @Controller
-@RequestMapping(path = "/users")
-public abstract class UsuarioControllerView {
+@RequestMapping(path = "/usuarios")
+public  class UsuarioControllerView {
 	@Autowired private UsuarioService service;
-	
-	@GetMapping
+	 
+	@GetMapping 
 	public String GetAll(Model model) {
 		model.addAttribute("users", service.findAll());
-		return "users/users";
+		return "usuarios/usuarios"; 
 	}
 
-	@GetMapping(value = "/novo")
+	@GetMapping(value = "/usuario")
 	public String cadastro(Model model) {
-		model.addAttribute("user", new Usuario());
-		return "personagens/formPersonagem";
+		model.addAttribute("usuario", new Usuario());
+		return "usuarios/formUsuario";   
 	}
-	@PostMapping(value = "/novo")
+	@PostMapping(value = "/usuario")
 	public String save(@Valid @ModelAttribute Usuario usuario, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("msgErros", result.getAllErrors());
-			return "users/formUser";
+			return "usuarios/formUsuario";
 
 		}
 		try {
 			service.create(usuario);
 			model.addAttribute("msgSucesso", "Usuario cadastrado com sucesso.");
 			model.addAttribute("personagemDTO", new PersonagemDTO());
-			return "users/formUser";
+			return "usuarios/formUsuario";
 		} catch (Exception e) {
 			model.addAttribute("msgErros", new ObjectError("Personagem", e.getMessage()));
-			return "users/formUser";
+			return "usuarios/formUsuario";
 		}
 
 	}
@@ -58,42 +58,42 @@ public abstract class UsuarioControllerView {
 		Usuario usuario = service.find(id);
 
 		model.addAttribute("usuario", usuario);
-		return "users/usuario";
+		return "usuarios/usuario"; 
 	}
 	
-	@GetMapping(value = "/update/{id}")
+	@GetMapping(value = "/usuario/{id}")
 	public String alterar(@PathVariable("id") Long id, Model model) {
 		Usuario usuario = service.find(id);
 
 		model.addAttribute("usuario", usuario);
-		return "users/formUser";
+		return "usuarios/formUsuario";
 	}
 
-	@PostMapping(path = "/update/{id}")
+	@PostMapping(path = "/usuario/{id}")
 	public String update(@Valid @ModelAttribute Usuario usuario, BindingResult result,
 			@PathVariable("id") Long id, Model model) {
 		// valores de retorno padão
 
 		if (result.hasErrors()) {
 			model.addAttribute("msgErros", result.getAllErrors());
-			return "users/formUser";
+			return "usuarios/formUsuario";
 		}
 
 		try {
 			service.update(id, usuario);
 			model.addAttribute("msgSucesso", "Personagem atualizado com sucesso.");
 			model.addAttribute("usuario", usuario);
-			return "users/formUser";
+			return "usuarios/formUsuario";
 		} catch (Exception e) {
 			model.addAttribute("msgErros", new ObjectError("usuario", e.getMessage()));
-			return "users/formUser";
+			return "usuarios/formUsuario";
 		}
 	}
 
 	@GetMapping(path = "/{id}/deletar")
 	public String deletar(@PathVariable("id") Long id) {
 		service.delete(id);
-		return "redirect:/personagens";
+		return "redirect:/usuarios"; 
 	}
 
 }

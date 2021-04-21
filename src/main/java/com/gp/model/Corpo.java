@@ -28,7 +28,7 @@ public class Corpo implements Serializable {
 	private FisicoEnum fisico;
 	@Column(nullable = false, length = 20)
 	@Enumerated(EnumType.STRING)
-	private ArmaduraEnum armadura;
+	private ArmaduraEnum armadura; 
 
 	public Corpo() {
 		super();
